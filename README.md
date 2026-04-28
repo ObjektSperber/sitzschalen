@@ -1,1 +1,1 @@
-# Sitzschalen-Preisliste
+# Sitzschalen
