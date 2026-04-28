@@ -78,7 +78,7 @@ button{border:0;border-radius:14px;padding:14px 12px;font-size:15px;font-weight:
     <div>
       <div class="eyebrow">HPL-CPL · Furnier · Edelfurnier</div>
       <h1>Preisrechner für Sitzschalen</h1>
-      <p>Preisorientierung für Sitz- und Rückenschalen. Wählen Sie Ausführung, Menge und Optionen. Sonderformen, B1-Ausführung und Änderungen bestehender Formen bitte separat anfragen.</p>
+      <p>Preisorientierung für Sitzschalen. Wählen Sie Ausführung, Menge und Optionen. Sonderformen, B1-Ausführung und Änderungen bestehender Formen bitte separat anfragen.</p>
       <div class="badge-row">
         <span class="badge">Buche Furnier</span>
         <span class="badge">Edelfurnier Eiche</span>
@@ -103,14 +103,6 @@ button{border:0;border-radius:14px;padding:14px 12px;font-size:15px;font-weight:
         <div>
           <label for="qty">Stückzahl</label>
           <input id="qty" type="number" min="1" step="1" value="50">
-        </div>
-        <div>
-          <label for="shape">Schalentyp</label>
-          <select id="shape">
-            <option>Sitzschale</option>
-            <option>Rückenschale</option>
-            <option>Sitz- und Rückenschale</option>
-          </select>
         </div>
       </div>
 
@@ -160,11 +152,9 @@ const PRICE_TIERS = [
 const BASES = {
   "Buche Furnier, roh": {p1:20, p2:19.5, p3:18, p4:17.7, p5:17.4, p6:16.356, unit:'Stk.'},
   "Buche Furnier, lackiert (B1)": {p1:26, p2:25.5, p3:24, p4:24, p5:24, p6:24, unit:'Stk.'},
-  "Buche Furnier, gebeizt": {p1:4, p2:4, p3:4, p4:4, p5:4, p6:4, unit:'Stk.'},
   "Edelfurnier Eiche, roh": {p1:50.5, p2:49.5, p3:48.5, p4:48.5, p5:48.5, p6:48.5, unit:'Stk.'},
   "Edelfurnier Eiche, lackiert": {p1:56.5, p2:55.5, p3:54.5, p4:54.5, p5:54.5, p6:54.5, unit:'Stk.'},
   "HPL Uni / Uni": {p1:49, p2:48.5, p3:48, p4:47.1, p5:46.2, p6:43.428, unit:'Stk.'},
-  "Uni / Holz": {p1:37, p2:35.5, p3:34, p4:33.4, p5:32.8, p6:30.832, unit:'Stk.'},
   "HPL Holz / Holz": {p1:54, p2:53.5, p3:53, p4:52, p5:51, p6:47.94, unit:'Stk.'}
 };
 
@@ -172,11 +162,9 @@ const BASES = {
 const BASE_IMAGES = {
   "Buche Furnier, roh": {img:"Furnierschale-600x600.jpg", caption:"Buche Furnier – helle, natürliche Furnierschale"},
   "Buche Furnier, lackiert (B1)": {img:"Furnierschale-600x600.jpg", caption:"Buche Furnier lackiert – helle Oberfläche mit Schutzlack"},
-  "Buche Furnier, gebeizt": {img:"Furnierschale-600x600.jpg", caption:"Buche Furnier gebeizt – Farbton nach Abstimmung"},
   "Edelfurnier Eiche, roh": {img:"Edelfurnier-600x600.jpg", caption:"Edelfurnier Eiche – hochwertige Furnieroberfläche"},
   "Edelfurnier Eiche, lackiert": {img:"Edelfurnier-600x600.jpg", caption:"Edelfurnier Eiche lackiert – hochwertige Oberfläche mit Schutzlack"},
   "HPL Uni / Uni": {img:"HPL-600x600.jpg", caption:"HPL / CPL – robuste Uni-Oberfläche"},
-  "Uni / Holz": {img:"HPL-600x600.jpg", caption:"HPL / CPL – Kombination aus Uni und Holzdekor"},
   "HPL Holz / Holz": {img:"HPL-600x600.jpg", caption:"HPL / CPL – Holzdekor-Oberfläche"}
 };
 
@@ -191,6 +179,7 @@ function updateVisual(){
 
 
 const OPTIONS = {
+  "Aufschlag Buche gebeizt": {p1:4, p2:4, p3:4, p4:4, p5:4, p6:4, unit:'Stk.', onlyBaseStartsWith:"Buche Furnier"},
   "Aufschlag 1,2 mm HPL": {p1:3.6, p2:3.6, p3:3.6, p4:3.6, p5:3.6, p6:3.6, unit:'Stk.'},
   "Kante 2 mal geölt": {p1:5.5, p2:5, p3:4.5, p4:4.4, p5:4.2, p6:4, unit:'Stk.'},
   "Griffloch": {p1:3, p2:2.8, p3:2.7, p4:2.5, p5:2, p6:1.9, unit:'Stk.'},
@@ -202,7 +191,7 @@ const OPTIONS = {
   "1 Einleimplatte + 4 Rampa": {p1:8, p2:7.5, p3:7, p4:6.9, p5:6.6, p6:6.2, unit:'Stk.'},
   "Rohling Sitzpolsterdoppel inkl. Bohrungen": {p1:5, p2:4.5, p3:4, p4:3.9, p5:3.7, p6:3.5, unit:'Stk.'},
   "Rohling Rückenpolsterdoppel inkl. Bohrungen": {p1:5, p2:4.5, p3:4, p4:3.9, p5:3.7, p6:3.5, unit:'Stk.'},
-  "Compaktplatte schwarz": {p1:36, p2:32, p3:30, p4:29.4, p5:28, p6:26.3, unit:'Stk.'},
+  "Compaktschale schwarz": {p1:36, p2:32, p3:30, p4:29.4, p5:28, p6:26.3, unit:'Stk.'},
   "Montage von Gestellen": {p1:8, p2:8, p3:8, p4:8, p5:8, p6:8, unit:'Stk.'}
 };
 
@@ -223,7 +212,7 @@ function fillOptions(){
   wrap.innerHTML = Object.keys(OPTIONS).map(k => `
     <label class="opt">
       <input type="checkbox" value="${k}">
-      <span>${k}<small>Preis abhängig von Menge</small></span>
+      <span>${k}<small>${OPTIONS[k].onlyBaseStartsWith ? 'nur bei Buche Furnier' : 'Preis abhängig von Menge'}</small></span>
     </label>
   `).join('');
 }
@@ -232,11 +221,29 @@ function selectedOptions(){
   return Array.from(document.querySelectorAll('#options input:checked')).map(i => i.value);
 }
 
+
+function updateOptionsAvailability(){
+  const base = document.getElementById('base').value;
+
+  Array.from(document.querySelectorAll('#options input')).forEach(input => {
+    const opt = OPTIONS[input.value];
+    const allowed = !opt.onlyBaseStartsWith || base.startsWith(opt.onlyBaseStartsWith);
+
+    input.disabled = !allowed;
+    input.closest('.opt').style.opacity = allowed ? '1' : '.45';
+
+    if(!allowed){
+      input.checked = false;
+    }
+  });
+}
+
 function calculate(){
   updateVisual();
+  updateOptionsAvailability();
+  updateOptionsAvailability();
   const qty = Math.max(1, Math.floor(Number(document.getElementById('qty').value || 1)));
   const base = document.getElementById('base').value;
-  const shape = document.getElementById('shape').value;
   const tier = getTier(qty);
   const key = tier.key;
 
@@ -255,7 +262,6 @@ function calculate(){
   document.getElementById('tierInfo').innerHTML = `<strong>Preisstaffel:</strong> ${tier.label}${qty < 10 ? ' · Mindermengenzuschlag aktiv' : ''}`;
 
   const rows = [
-    ['Schalentyp', shape],
     ['Ausführung', base],
     ['Preisstaffel', tier.label],
     ['Grundpreis/Stück', euro(basePrice)],
@@ -266,9 +272,8 @@ function calculate(){
   document.getElementById('details').innerHTML = rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
 
   window.currentSummary =
-`Preisanfrage Sitzschale / HPL-CPL
+`Preisanfrage Sitzschale
 
-Schalentyp: ${shape}
 Ausführung: ${base}
 Menge: ${qty} Stück
 Preisstaffel: ${tier.label}
@@ -294,7 +299,7 @@ function sendMail(){
 
 fillBase();
 fillOptions();
-['base','qty','shape'].forEach(id => {
+['base','qty'].forEach(id => {
   document.getElementById(id).addEventListener('input', calculate);
   document.getElementById(id).addEventListener('change', calculate);
 });
